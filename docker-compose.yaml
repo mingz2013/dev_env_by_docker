@@ -1,0 +1,72 @@
+version: '3.7'
+
+services:
+
+  etcd:
+    image: 'bitnami/etcd:latest'
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    ports:
+      - 2379:2379
+      - 2380:2380
+      - 4001:4001
+    networks:
+      - my_network
+
+  redis:
+    image: redis:latest
+    volumes:
+      #      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:rw
+      - ./data/redis:/data
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - my_network
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data
+    command: mongod
+    networks:
+      - my_network
+    restart: always
+
+#  server:
+#    build: ./
+#    entrypoint: /bin/server
+##    command: -c /conf/service/greeter.yml
+#    networks:
+#      - rpc_test_network
+#    deploy:
+#      replicas: 1
+#    depends_on:
+#      - etcd
+#
+#  client:
+#    build: ./
+#    entrypoint: /bin/client
+#    networks:
+#      - rpc_test_network
+#    depends_on:
+#      - etcd
+#      - server
+##    environment:
+##      - GRPC_GO_LOG_SEVERITY_LEVEL=info
+
+
+
+networks:
+  my_network:
+    name: my_network
+    #    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.50.0.1/16
+
+
