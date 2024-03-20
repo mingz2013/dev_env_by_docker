@@ -30,8 +30,8 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./data/mongo:/data
-    command: mongod
+      - ./data/mongo:/data/db
+    command: mongod --replSet rs0 # 单节点复制集
     networks:
       - my_network
     restart: always
