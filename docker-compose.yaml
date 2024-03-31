@@ -8,9 +8,9 @@ services:
       - ALLOW_NONE_AUTHENTICATION=yes
       - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
     ports:
-      - 2379:2379
-      - 2380:2380
-      - 4001:4001
+      - "2379:2379"
+      - "2380:2380"
+      - "4001:4001"
     networks:
       - my_network
 
@@ -21,14 +21,14 @@ services:
       - ./data/redis:/data
     restart: always
     ports:
-      - 6379:6379
+      - "6379:6379"
     networks:
       - my_network
 
   mongo:
     image: mongo
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - ./data/mongo:/data/db
     command: mongod --wiredTigerCacheSizeGB 25 --bind_ip_all --replSet rs0 # 单节点复制集
