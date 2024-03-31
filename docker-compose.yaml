@@ -40,7 +40,7 @@ services:
     image: "pikadb/pika:latest"
     container_name: pikadb
     ports:
-      - "6379:9221"
+      - "9221:9221"
     volumes:
       - ./data/pika:/pika/log
       # Specify the configuration file path. If you need to specify a configuration file, specify it here.
