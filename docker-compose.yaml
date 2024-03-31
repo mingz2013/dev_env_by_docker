@@ -4,6 +4,7 @@ services:
 
   etcd:
     image: 'bitnami/etcd:latest'
+    container_name: etcd
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
       - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
@@ -16,6 +17,7 @@ services:
 
   redis:
     image: "redis:latest"
+    container_name: redis
     volumes:
       #      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:rw
       - ./data/redis:/data
@@ -27,6 +29,7 @@ services:
 
   mongo:
     image: mongo
+    container_name: mongo
     ports:
       - "27017:27017"
     volumes:
