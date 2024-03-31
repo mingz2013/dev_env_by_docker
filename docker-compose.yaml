@@ -15,7 +15,7 @@ services:
       - my_network
 
   redis:
-    image: redis:latest
+    image: "redis:latest"
     volumes:
       #      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:rw
       - ./data/redis:/data
@@ -37,7 +37,7 @@ services:
     restart: always
 
   pikadb:
-    image: pikadb/pika:lastest
+    image: "pikadb/pika:latest"
     container_name: pikadb
     ports:
       - "6379:9221"
