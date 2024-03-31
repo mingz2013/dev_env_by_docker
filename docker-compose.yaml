@@ -48,10 +48,11 @@ services:
       - ./data/pika:/pika/log
       # Specify the configuration file path. If you need to specify a configuration file, specify it here.
       # Note: pika.conf should be in the ./deploy/pika directory
-      - ./deploy/pika:/pika/conf
+#      - ./deploy/pika:/pika/conf
       - ./data/pika/db:/pika/db
       - ./data/pika/dump:/pika/dump
       - ./data/pika/dbsync:/pika/dbsync
+      - ./data/pika/pid/:/pika/pid
     privileged: true
     restart: always
     networks:
