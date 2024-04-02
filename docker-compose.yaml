@@ -39,8 +39,6 @@ services:
     networks:
       - my_network
 
-
-
   pika:
     image: "pikadb/pika:latest"
     container_name: pika
@@ -92,6 +90,8 @@ services:
     container_name: tendis
     ports:
       - "51002:51002"
+    volumes:
+      - ./data/tendis:/data
     privileged: true
     restart: always
     networks:
