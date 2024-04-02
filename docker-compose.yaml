@@ -39,9 +39,9 @@ services:
       - my_network
     restart: always
 
-  pikadb:
+  pika:
     image: "pikadb/pika:latest"
-    container_name: pikadb
+    container_name: pika
     ports:
       - "9221:9221"
     volumes:
