@@ -15,6 +15,18 @@ services:
     networks:
       - my_network
 
+  mongo:
+    image: "mongo:latest"
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo:/data/db
+    command: mongod --wiredTigerCacheSizeGB 25 --bind_ip_all --replSet rs0 # 单节点复制集
+    networks:
+      - my_network
+    restart: always
+
   redis:
     image: "redis:latest"
     container_name: redis
@@ -27,17 +39,7 @@ services:
     networks:
       - my_network
 
-  mongo:
-    image: "mongo:latest"
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./data/mongo:/data/db
-    command: mongod --wiredTigerCacheSizeGB 25 --bind_ip_all --replSet rs0 # 单节点复制集
-    networks:
-      - my_network
-    restart: always
+
 
   pika:
     image: "pikadb/pika:latest"
@@ -58,29 +60,42 @@ services:
     networks:
       - my_network
 
-#  server:
-#    build: ./
-#    entrypoint: /bin/server
-##    command: -c /conf/service/greeter.yml
-#    networks:
-#      - rpc_test_network
-#    deploy:
-#      replicas: 1
-#    depends_on:
-#      - etcd
-#
-#  client:
-#    build: ./
-#    entrypoint: /bin/client
-#    networks:
-#      - rpc_test_network
-#    depends_on:
-#      - etcd
-#      - server
-##    environment:
-##      - GRPC_GO_LOG_SEVERITY_LEVEL=info
+  ledis:
+    image: "expert/ledisdb:latest"
+    container_name: ledis
+    ports:
+      - "6380:6380"
+      - "11181:11181"
+    volumes:
+#      - /host_data/etc/ledisdb.conf:/etc/ledisdb.conf
+      - ./data/ledis:/data
+    privileged: true
+    restart: always
+    networks:
+      - my_network
+
+  kvrocks:
+    image: "apache/kvrocks:latest"
+    container_name: kvrocks
+    ports:
+      - "6666:6666"
+    volumes:
+      - ./data/kvrocks:/data
+    privileged: true
+    restart: always
+    networks:
+      - my_network
 
 
+  tendis:
+    image: "tencentdbforkv/tendisplus"
+    container_name: tendis
+    ports:
+      - "51002:51002"
+    privileged: true
+    restart: always
+    networks:
+      - my_network
 
 networks:
   my_network:
