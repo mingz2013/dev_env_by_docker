@@ -1,19 +1,29 @@
 version: '3.7'
 
+networks:
+  my_network:
+    name: my_network
+    #    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.50.0.0/16
+
+
 services:
 
-  etcd:
-    image: 'bitnami/etcd:latest'
-    container_name: etcd
-    environment:
-      - ALLOW_NONE_AUTHENTICATION=yes
-      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
-    ports:
-      - "2379:2379"
-      - "2380:2380"
-      - "4001:4001"
-    networks:
-      - my_network
+#  etcd:
+#    image: 'bitnami/etcd:latest'
+#    container_name: etcd
+#    environment:
+#      - ALLOW_NONE_AUTHENTICATION=yes
+#      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+#    ports:
+#      - "2379:2379"
+#      - "2380:2380"
+#      - "4001:4001"
+#    networks:
+#      - my_network
 
   mongo:
     image: "mongo:latest"
@@ -39,24 +49,24 @@ services:
     networks:
       - my_network
 
-  pika:
-    image: "pikadb/pika:latest"
-    container_name: pika
-    ports:
-      - "9221:9221"
-    volumes:
-      - ./data/pika:/pika/log
-      # Specify the configuration file path. If you need to specify a configuration file, specify it here.
-      # Note: pika.conf should be in the ./deploy/pika directory
-      - ./deploy/pika:/pika/conf
-      - ./data/pika/db:/pika/db
-      - ./data/pika/dump:/pika/dump
-      - ./data/pika/dbsync:/pika/dbsync
-      - ./data/pika/pid/:/pika/pid
-    privileged: true
-    restart: always
-    networks:
-      - my_network
+#  pika:
+#    image: "pikadb/pika:latest"
+#    container_name: pika
+#    ports:
+#      - "9221:9221"
+#    volumes:
+#      - ./data/pika:/pika/log
+#      # Specify the configuration file path. If you need to specify a configuration file, specify it here.
+#      # Note: pika.conf should be in the ./deploy/pika directory
+#      - ./deploy/pika:/pika/conf
+#      - ./data/pika/db:/pika/db
+#      - ./data/pika/dump:/pika/dump
+#      - ./data/pika/dbsync:/pika/dbsync
+#      - ./data/pika/pid/:/pika/pid
+#    privileged: true
+#    restart: always
+#    networks:
+#      - my_network
 
 #  ledis:
 #    image: "expert/ledisdb:6.6.4"
@@ -105,13 +115,6 @@ services:
     networks:
       - my_network
 
-networks:
-  my_network:
-    name: my_network
-    #    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.50.0.0/16
+
 
 
