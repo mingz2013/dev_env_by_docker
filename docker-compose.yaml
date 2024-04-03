@@ -94,7 +94,7 @@ services:
 #      - ./data/kvrocks/thebestdbname:/var/lib/kvrocks/thebestdbname
       - ./data/kvrocks/backup:/var/lib/kvrocks/backup
 #      - ./data/kvrocks/kvrocks.pid:/var/run/kvrocks/kvrocks.pid
-    command: "--workers 16"
+    command: "--workers 8"
     privileged: true
     restart: always
     networks:
