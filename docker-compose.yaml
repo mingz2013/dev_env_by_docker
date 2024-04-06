@@ -82,39 +82,39 @@ services:
 #    networks:
 #      - my_network
 
-  kvrocks:
-    image: "apache/kvrocks:latest"
-    container_name: kvrocks
-    ports:
-      - "6666:6666"
-    volumes:
-#      - ./deploy/kvrocks/kvrocks.conf:/var/lib/kvrocks/kvrocks.conf
-#      - ./data/kvrocks:/var/lib/kvrocks
-      - ./data/kvrocks/db:/var/lib/kvrocks/db
-#      - ./data/kvrocks/thebestdbname:/var/lib/kvrocks/thebestdbname
-      - ./data/kvrocks/backup:/var/lib/kvrocks/backup
-#      - ./data/kvrocks/kvrocks.pid:/var/run/kvrocks/kvrocks.pid
-    command: "--workers 8"
-    privileged: true
-    restart: always
-    networks:
-      - my_network
+#  kvrocks:
+#    image: "apache/kvrocks:latest"
+#    container_name: kvrocks
+#    ports:
+#      - "6666:6666"
+#    volumes:
+##      - ./deploy/kvrocks/kvrocks.conf:/var/lib/kvrocks/kvrocks.conf
+##      - ./data/kvrocks:/var/lib/kvrocks
+#      - ./data/kvrocks/db:/var/lib/kvrocks/db
+##      - ./data/kvrocks/thebestdbname:/var/lib/kvrocks/thebestdbname
+#      - ./data/kvrocks/backup:/var/lib/kvrocks/backup
+##      - ./data/kvrocks/kvrocks.pid:/var/run/kvrocks/kvrocks.pid
+#    command: "--workers 8"
+#    privileged: true
+#    restart: always
+#    networks:
+#      - my_network
 
 
-  tendis:
-    image: "tencentdbforkv/tendisplus"
-    container_name: tendis
-    ports:
-      - "51002:51002"
-    volumes:
-#      - ./deploy/tendis/tendis.conf:/data1/tendis/scripts/tendis.conf
-      - ./data/tendis/db:/data1/tendis/51002/db
-      - ./data/tendis/log:/data1/tendis/51002/log
-      - ./data/tendis/dump:/data1/tendis/51002/dump
-    privileged: true
-    restart: always
-    networks:
-      - my_network
+#  tendis:
+#    image: "tencentdbforkv/tendisplus"
+#    container_name: tendis
+#    ports:
+#      - "51002:51002"
+#    volumes:
+##      - ./deploy/tendis/tendis.conf:/data1/tendis/scripts/tendis.conf
+#      - ./data/tendis/db:/data1/tendis/51002/db
+#      - ./data/tendis/log:/data1/tendis/51002/log
+#      - ./data/tendis/dump:/data1/tendis/51002/dump
+#    privileged: true
+#    restart: always
+#    networks:
+#      - my_network
 
 
 
