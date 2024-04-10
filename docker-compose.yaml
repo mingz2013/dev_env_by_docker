@@ -68,20 +68,6 @@ services:
     networks:
       - my_network
 
-  ledis:
-    image: "expert/ledisdb:6.6.4"
-    container_name: ledis
-    ports:
-      - "6380:6380"
-      - "11181:11181"
-    volumes:
-      - ./deploy/ledis/ledisdb.conf:/etc/ledisdb.conf
-      - ./data/ledis:/data
-    privileged: true
-    restart: always
-    networks:
-      - my_network
-
   kvrocks:
     image: "apache/kvrocks:latest"
     container_name: kvrocks
